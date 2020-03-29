@@ -50,12 +50,11 @@ public class StudentRepository {
         return  student1;
     }
 
-    public int updateStudent(Long id,Student student){
-      //  return jdbcTemplate.update("update student " + " set name = ?, passport_number = ? " + " where id = ?",
-
-        return   jdbcTemplate.update("update student" + " set name = ?, passport_number = ?" + "where id = ?" , new Object[]{
+    public Student updateStudent(Long id,Student student){
+        jdbcTemplate.update("update student" + " set name = ?, passport_number = ?" + "where id = ?" , new Object[]{
                 student.getName(), student.getPassportNumber(), student.getId()
         });
+        return findById(student.getId());
     }
 
     public int deleteById(Long id){

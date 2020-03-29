@@ -28,8 +28,8 @@ public class StudentController {
 }
 
 @PutMapping("/{id}")
-    public int updateStudent(@PathVariable Long id, @RequestBody Student student){
-    student.setId(id);
+    public Student updateStudent(@PathVariable Long id, @RequestBody Student student){
+
     return  studentRepository.updateStudent(id,student);
 }
 
