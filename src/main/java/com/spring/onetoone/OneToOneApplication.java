@@ -33,7 +33,7 @@ public class OneToOneApplication implements CommandLineRunner {
 
 
 		//create user
-		User user =  new User("Rajeev", "Patel", "ria@ielts.com" ,"PASSWORD");
+		User user =  new User("Rajriya", "Patel", "ria@ielts.com" ,"PASSWORD");
 		User user1 =  new User("Rajeev", "Patel", "ria@ielts.com" ,"PASSWORD");
 
 		// Create a UserProfile instance

@@ -25,6 +25,15 @@ public class UserController {
         return userRepository.findById(userId).get();
     }
 
+    @GetMapping(params = {"firstName"})
+    public  User findByName(@RequestParam String firstName){
+        return userRepository.findByFirstName(firstName);
+    }
+    @GetMapping(params = {"firstName", "lastName"})
+    public  User findByName(@RequestParam String firstName,@RequestParam String lastName){
+        return userRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
+
     @PostMapping()
         public User createUser(@RequestBody  User user){
             return userRepository.save(user);
