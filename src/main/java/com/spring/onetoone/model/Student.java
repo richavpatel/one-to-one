@@ -1,7 +1,9 @@
 package com.spring.onetoone.model;
 
+import java.io.Serializable;
+
 // Created Student class for Jdbc Template
-public class Student {
+public class Student implements Serializable {
 
     private Long id;
     private String name;

@@ -15,41 +15,41 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 public class OneToOneApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(OneToOneApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(OneToOneApplication.class, args);
+    }
 
-	@Autowired
-	UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
-	@Autowired
-	UserProfileRepository userProfileRepository;
+    @Autowired
+    UserProfileRepository userProfileRepository;
 
-	@Override
-	public void run(String... args) throws Exception {
-
-
-		//clean up database
-		userProfileRepository.deleteAllInBatch();
-		userRepository.deleteAllInBatch();
+    @Override
+    public void run(String... args) throws Exception {
 
 
-		//create user
-		User user =  new User("Rajriya", "Patel", "ria@ielts.com" ,"PASSWORD");
-		User user1 =  new User("Rajeev", "Patel", "ria@ielts.com" ,"PASSWORD");
+        //clean up database
+        userProfileRepository.deleteAllInBatch();
+        userRepository.deleteAllInBatch();
 
-		// Create a UserProfile instance
-		UserProfile userProfile = new UserProfile("91-8197882053", Gender.MALE, "747", "2nd Cross", "Golf View Road, Kodihalli", "Bangalore",
-				"Karnataka", "India", "560008");
 
-		// Set parent reference(user) in child entity(userProfile)
-		userProfile.setUser(user);
+        //create user
+        User user = new User("Rajriya", "Patel", "ria@ielts.com", "PASSWORD");
+        User user1 = new User("Rajeev", "Patel", "ria@ielts.com", "PASSWORD");
 
-		// Set child reference(userProfile) in parent entity(user)
-		user.setUserProfile(userProfile);
+        // Create a UserProfile instance
+        UserProfile userProfile = new UserProfile("91-8197882053", Gender.MALE, "747", "2nd Cross", "Golf View Road, Kodihalli", "Bangalore",
+                "Karnataka", "India", "560008");
 
-		// Save Parent Reference (which will save the child as well)
-		userRepository.save(user);
-		userRepository.save(user1);
-	}
+        // Set parent reference(user) in child entity(userProfile)
+        userProfile.setUser(user);
+
+        // Set child reference(userProfile) in parent entity(user)
+        user.setUserProfile(userProfile);
+
+        // Save Parent Reference (which will save the child as well)
+        userRepository.save(user);
+        userRepository.save(user1);
+    }
 }

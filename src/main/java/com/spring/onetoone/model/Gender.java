@@ -1,6 +1,6 @@
 package com.spring.onetoone.model;
 
-public enum  Gender {
+public enum Gender {
 
     MALE,
     FEMALE;

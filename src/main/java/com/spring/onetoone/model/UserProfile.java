@@ -1,13 +1,13 @@
 package com.spring.onetoone.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 
-
 @Entity
-public class UserProfile{
+public class UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +40,7 @@ public class UserProfile{
     private String zipCode;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
     private User user;
 
@@ -136,14 +136,14 @@ public class UserProfile{
     }
 
     public UserProfile(String phoneNumber, Gender gender, String address1, String address2, String street, String city, String state, String country, String zipCode) {
-        this.phoneNumber= phoneNumber;
-        this.gender =gender;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
         this.address1 = address1;
-        this.address2 =address2;
-        this.street =street;
+        this.address2 = address2;
+        this.street = street;
         this.city = city;
-        this.state =state;
-        this.country=country;
+        this.state = state;
+        this.country = country;
         this.zipCode = zipCode;
 
 

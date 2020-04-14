@@ -20,7 +20,7 @@ public class StudentRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    class StudentRowMapper implements RowMapper<Student>{
+    class StudentRowMapper implements RowMapper<Student> {
 
         @Override
         public Student mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -33,32 +33,32 @@ public class StudentRepository {
         }
     }
 
-    public Student findById(long id){
-        return jdbcTemplate.queryForObject("select * from student where id = ?", new Object[] {id},
+    public Student findById(long id) {
+        return jdbcTemplate.queryForObject("select * from student where id = ?", new Object[]{id},
                 new BeanPropertyRowMapper<Student>(Student.class));
     }
 
-    public List<Student> getAll(){
+    public List<Student> getAll() {
         return jdbcTemplate.query("select * from student", new StudentRowMapper());
 
     }
 
-    public int addStudent(Student student){
-        int student1 = jdbcTemplate.update("insert into student(id, name, passport_number)" +" values (?,?,?)",
+    public int addStudent(Student student) {
+        int student1 = jdbcTemplate.update("insert into student(id, name, passport_number)" + " values (?,?,?)",
                 new Object[]{
-                      student.getId(), student.getName(), student.getPassportNumber()});
-        return  student1;
+                        student.getId(), student.getName(), student.getPassportNumber()});
+        return student1;
     }
 
-    public Student updateStudent(Long id,Student student){
-        jdbcTemplate.update("update student" + " set name = ?, passport_number = ?" + "where id = ?" , new Object[]{
+    public Student updateStudent(Long id, Student student) {
+        jdbcTemplate.update("update student" + " set name = ?, passport_number = ?" + "where id = ?", new Object[]{
                 student.getName(), student.getPassportNumber(), student.getId()
         });
         return findById(student.getId());
     }
 
-    public int deleteById(Long id){
-        return  jdbcTemplate.update("delete from student where id = ?", new Object[]{id});
+    public int deleteById(Long id) {
+        return jdbcTemplate.update("delete from student where id = ?", new Object[]{id});
     }
 
 

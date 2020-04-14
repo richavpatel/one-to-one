@@ -20,34 +20,34 @@ public class UserProfileController {
 
 
     @GetMapping("/users/{userId}/userProfile")
-    public UserProfile getUserProfileByUser(@PathVariable Long userId){
+    public UserProfile getUserProfileByUser(@PathVariable Long userId) {
 
-       return userProfileRepository.findAllByUserId(userId);
+        return userProfileRepository.findAllByUserId(userId);
     }
 
     @PostMapping("/users/{userId}/userProfile")
-    public UserProfile createUserProfile(@PathVariable Long userId, @RequestBody UserProfile userProfile){
-        User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("UserId Not found " + userId));
-         userProfile.setUser(user);
-         return userProfileRepository.save(userProfile);
+    public UserProfile createUserProfile(@PathVariable Long userId, @RequestBody UserProfile userProfile) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("UserId Not found " + userId));
+        userProfile.setUser(user);
+        return userProfileRepository.save(userProfile);
     }
 
     @PutMapping("/users/{userId}/userProfile/{userProfileId}")
-    public UserProfile updateUserProfile(@PathVariable Long userId, @PathVariable Long userProfileId, @RequestBody UserProfile userProfile){
-        if(!userRepository.existsById(userId)){
-            throw  new ResourceNotFoundException("UserId Not Found: "+userId);
+    public UserProfile updateUserProfile(@PathVariable Long userId, @PathVariable Long userProfileId, @RequestBody UserProfile userProfile) {
+        if (!userRepository.existsById(userId)) {
+            throw new ResourceNotFoundException("UserId Not Found: " + userId);
         }
-        if(!userProfileRepository.existsById(userProfileId)){
-            throw  new ResourceNotFoundException("UserId Not Found: "+userProfileId);
+        if (!userProfileRepository.existsById(userProfileId)) {
+            throw new ResourceNotFoundException("UserId Not Found: " + userProfileId);
         }
-        User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("UserId Not found " + userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("UserId Not found " + userId));
         userProfile.setUser(user);
-      return userProfileRepository.save(userProfile);
+        return userProfileRepository.save(userProfile);
     }
 
     @DeleteMapping("userProfile/{userProfileId}")
-    public void deleteUserProfile(@PathVariable Long userProfileId){
-         userProfileRepository.deleteById(userProfileId);
+    public void deleteUserProfile(@PathVariable Long userProfileId) {
+        userProfileRepository.deleteById(userProfileId);
     }
 
 }

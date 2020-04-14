@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
-
 @Entity
 @NoArgsConstructor
 @Getter
@@ -21,10 +20,10 @@ public class User {
     private Long id;
 
     @NotNull
-    @Size(min = 4, max=65, message = "FirstName Should between 4 and 65")
+    @Size(min = 4, max = 65, message = "FirstName Should between 4 and 65")
     private String firstName;
 
-    @Size(max=65)
+    @Size(max = 65)
     private String lastName;
 
     @NotNull
@@ -34,10 +33,9 @@ public class User {
     private String password;
 
     @OneToOne(fetch = FetchType.LAZY,
-              cascade = CascadeType.ALL,
-              mappedBy = "user")
+            cascade = CascadeType.ALL,
+            mappedBy = "user")
     private UserProfile userProfile;
-
 
 
     public User(String rajeev, String patel, String s, String password) {
