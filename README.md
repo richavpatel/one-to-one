@@ -2,9 +2,6 @@
 One-to-One-Spring-JPA 
 
 ->Gender, User, UserProfile classes for OneToOne spring jpa example
-->Student class 
-  JDBC Template
-  simpleCache
-  EhCache
+->Student class for JDBC Template
 
 
