@@ -1,6 +1,9 @@
 package com.spring.onetoone.config;
 
 
+import com.spring.onetoone.repository.StudentRepository;
+import com.spring.onetoone.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
@@ -23,6 +26,11 @@ public class EhcacheConfig {
         factoryBean.setShared(true);
         return factoryBean.getObject();
     }
-
+   @Autowired
+    StudentRepository studentRepository;
+    @Bean
+    public StudentService studentService(){
+        return new StudentService(studentRepository);
+    }
 
 }

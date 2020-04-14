@@ -3,6 +3,7 @@ package com.spring.onetoone.controller;
 import com.spring.onetoone.model.Student;
 import com.spring.onetoone.repository.StudentRepository;
 
+import com.spring.onetoone.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,39 +18,37 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
 
-    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+
 
     @Autowired
-    StudentRepository studentRepository;
+    StudentService studentService;
 
     @GetMapping()
     public List<Student> findAll() {
-        return studentRepository.getAll();
+        return studentService.findAll();
     }
 
     @Cacheable(cacheNames = "students", key = "#id")
     @GetMapping("/{id}")
     public Student findStudentById(@PathVariable Long id) {
-        logger.info("getting data from student database");
-
-        return studentRepository.findById(id);
+        return studentService.findStudentById(id);
     }
 
     @PostMapping()
     public int addStudent(@RequestBody Student student) {
-        return studentRepository.addStudent(student);
+        return studentService.addStudent(student);
     }
 
     @CachePut(cacheNames = "students", key = "#id")
     @PutMapping("/{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
 
-        return studentRepository.updateStudent(id, student);
+        return studentService.updateStudent(id, student);
     }
 
     @CacheEvict(cacheNames = "students", key = "#id")
     @DeleteMapping("/{id}")
     public int deleteStudent(@PathVariable Long id) {
-        return studentRepository.deleteById(id);
+        return studentService.deleteStudent(id);
     }
 }
